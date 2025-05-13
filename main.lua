@@ -1,6 +1,9 @@
 --dependencies
 local push = require('libraries/push')
 local sti = require('libraries/sti')
+local lovebird = require("libraries/lovebird")
+Class = require("libraries/Class")
+
 local setup = require("functions/setup")
 local currentMap
 
@@ -9,6 +12,10 @@ function love.load()
     setup.SetupWindow()
     currentMap = sti("assets/maps/testMap.lua")
     
+end
+
+function love.update(dt)
+    lovebird.update()
 end
 
 function love.draw()
