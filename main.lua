@@ -13,7 +13,7 @@ function love.load()
     currentMap = sti("assets/maps/testMap.lua")
     
 end
-
+ 
 function love.update(dt)
     lovebird.update()
 end
@@ -25,6 +25,7 @@ function love.draw()
 
         love.graphics.setColor(1, 0, 0)
         love.graphics.rectangle("fill", 100, 100, 220, 20)
+        love.graphics.setColor(1, 1, 1)
 
     push:finish()
 end
