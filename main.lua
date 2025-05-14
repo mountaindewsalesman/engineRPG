@@ -7,12 +7,13 @@ Anim8 = require("libraries/anim8")
 
 local setup = require("functions/setup")
 TileConvert = require("functions/TileConvert")
+Rect = require("functions/Rect")
 
 require("classes/Entity")
 
-Debug = false
+Debug = true
 
-local tempPlayer = Entity(10, 10, 32, 32, 0, 0)
+local tempPlayer = Entity(50, 50, 30, 30, 0, 0, true)
 
 
 function love.load()
@@ -28,16 +29,29 @@ function love.load()
     ---
     tempPlayer.spriteSheet = love.graphics.newImage("assets/player/playerSprite.png")
     tempPlayer.animationGrid = Anim8.newGrid(32, 32, tempPlayer.spriteSheet:getWidth(), tempPlayer.spriteSheet:getHeight())
-    
-    tempPlayer.animations[1] = Anim8.newAnimation(tempPlayer.animationGrid('1-2',1), 0.1)
+    tempPlayer.animations[1] = Anim8.newAnimation(tempPlayer.animationGrid('1-2',1), 0.5)
 
-    Lovebird.print(tempPlayer.animations[1])
 end
  
 function love.update(dt)
     Lovebird.update()
-    
+
+    tempPlayer.yVel = 0
+    if love.keyboard.isDown("up") then
+        tempPlayer.yVel = tempPlayer.yVel - 150
+    elseif love.keyboard.isDown("down") then
+        tempPlayer.yVel = tempPlayer.yVel + 150
+    end
+
+    tempPlayer.xVel = 0
+    if love.keyboard.isDown("left") then
+        tempPlayer.xVel = tempPlayer.xVel - 150
+    elseif love.keyboard.isDown("right") then
+        tempPlayer.xVel = tempPlayer.xVel + 150
+    end
+
     tempPlayer:update(dt)
+
 end
 
 function love.draw()
