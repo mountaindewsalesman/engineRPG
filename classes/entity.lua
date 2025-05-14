@@ -57,7 +57,7 @@ end
 
 function Entity:draw()
     if #self.animations > 0 then
-        self.animations[1]:draw(self.spriteSheet, math.floor(self.x+0.5), math.floor(self.y))
+        self.animations[self.currentAnimation]:draw(self.spriteSheet, math.floor(self.x+0.5), math.floor(self.y))
     end
 
     if Debug then

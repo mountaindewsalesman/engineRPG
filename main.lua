@@ -13,8 +13,12 @@ require("classes/Entity")
 
 Debug = true
 
-local tempPlayer = Entity(50, 50, 30, 30, 0, 0, true)
 
+Camera = {
+    x = 0,
+    y = 0,
+    weight = 0.95
+ }
 
 function love.load()
     --load any assets
@@ -27,31 +31,12 @@ function love.load()
 
     
     ---
-    tempPlayer.spriteSheet = love.graphics.newImage("assets/player/playerSprite.png")
-    tempPlayer.animationGrid = Anim8.newGrid(32, 32, tempPlayer.spriteSheet:getWidth(), tempPlayer.spriteSheet:getHeight())
-    tempPlayer.animations[1] = Anim8.newAnimation(tempPlayer.animationGrid('1-2',1), 0.5)
+    
 
 end
  
 function love.update(dt)
     Lovebird.update()
-
-    tempPlayer.yVel = 0
-    if love.keyboard.isDown("up") then
-        tempPlayer.yVel = tempPlayer.yVel - 150
-    elseif love.keyboard.isDown("down") then
-        tempPlayer.yVel = tempPlayer.yVel + 150
-    end
-
-    tempPlayer.xVel = 0
-    if love.keyboard.isDown("left") then
-        tempPlayer.xVel = tempPlayer.xVel - 150
-    elseif love.keyboard.isDown("right") then
-        tempPlayer.xVel = tempPlayer.xVel + 150
-    end
-
-    tempPlayer:update(dt)
-
 end
 
 function love.draw()
@@ -67,8 +52,6 @@ function love.draw()
                 end
             end
         end
-        
-    tempPlayer:draw()
     push:finish()
 
 end

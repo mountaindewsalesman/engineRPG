@@ -1,0 +1,5 @@
+--load an animation
+local temPlayer
+tempPlayer.spriteSheet = love.graphics.newImage("assets/player/playerSprite.png")
+tempPlayer.animationGrid = Anim8.newGrid(32, 32, tempPlayer.spriteSheet:getWidth(), tempPlayer.spriteSheet:getHeight())
+tempPlayer.animations[1] = Anim8.newAnimation(tempPlayer.animationGrid('1-2',1), 0.5)
