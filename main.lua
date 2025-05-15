@@ -11,7 +11,7 @@ Rect = require("functions/Rect")
 
 require("classes/Entity")
 
-Debug = true
+Debug = false
 
 
 Camera = {
@@ -59,3 +59,4 @@ end
 function love.resize(w, h)
     push:resize(w, h)
 end
+
