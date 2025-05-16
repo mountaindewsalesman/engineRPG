@@ -10,8 +10,8 @@ function setup.SetupWindow()
 end
 
 function setup.setupPlayer()
-    local playerEntity = Entity(50, 50, 10, 10, 0, 0, true, -11, -22, 1)
-    Player = PlayerClass(playerEntity, 100000, 100, 0.000001, {})
+    local playerEntity = Entity(50, 50, 14, 10, 0, 0, true, -9, -22, 1)
+    Player = PlayerClass(playerEntity, 100000, 100, 0.0000001, {})
     Player.entity.direction = -1
 end
 return setup

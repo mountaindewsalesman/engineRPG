@@ -22,7 +22,7 @@ return {
       spacing = 0,
       margin = 0,
       columns = 20,
-      image = "beach.png",
+      image = "tilesets/beach.png",
       imagewidth = 640,
       imageheight = 640,
       objectalignment = "unspecified",

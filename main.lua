@@ -12,14 +12,8 @@ Rect = require("functions/Rect")
 require("classes/Entity")
 require("classes/player")
 
-Debug = false
+Debug = true
 
-
-Camera = {
-    x = 0,
-    y = 0,
-    weight = 0.95
- }
 
 function love.load()
     --load any assets
