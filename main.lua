@@ -10,6 +10,7 @@ TileConvert = require("functions/TileConvert")
 Rect = require("functions/Rect")
 
 require("classes/Entity")
+require("classes/player")
 
 Debug = false
 
@@ -27,9 +28,7 @@ function love.load()
 
     CurrentMap = sti("assets/maps/testMap.lua")
     MapTileSize = 32
-
-
-    
+    setup.setupPlayer()    
     ---
     
 
@@ -37,6 +36,7 @@ end
  
 function love.update(dt)
     Lovebird.update()
+    Player:update(dt)
 end
 
 function love.draw()
@@ -52,6 +52,8 @@ function love.draw()
                 end
             end
         end
+    
+        Player:draw()
     push:finish()
 
 end

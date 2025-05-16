@@ -1,6 +1,6 @@
 Entity = Class{}
 
-function Entity:init(x, y, w, h, xVel, yVel, collides, animations, currentAnimation)
+function Entity:init(x, y, w, h, xVel, yVel, collides, spriteOffX, spriteOffY, direction)
     self.x = x or 0
     self.y = y or 0
     self.w = w or 32
@@ -8,14 +8,19 @@ function Entity:init(x, y, w, h, xVel, yVel, collides, animations, currentAnimat
     self.xVel = xVel or 0
     self.yVel = yVel or 0 
 
-    self.animations = animations or {}
-    self.currentAnimation = currentAnimation or 1
-    self.collides = collides or false
-
+    self.animations = {}
+    self.currentAnimation = 1
     self.spriteSheet = 0
     self.animationGrid = 0
+    
+    self.spriteOffX = spriteOffX or 0
+    self.spriteOffY = spriteOffY or 0
+    self.direction = direction or 1
 
+    self.collides = collides or false
     self.hitbox = {x = x, y = y, w = w, h = h}
+
+    self.gridFlipTranslation = 0
 end
 
 function Entity:update(dt)
@@ -24,6 +29,15 @@ function Entity:update(dt)
 
     --update animations
     self.animations[self.currentAnimation]:update(dt)
+
+    --update sprite drawing
+    if self.direction == -1 then
+        local quad = self.animations[self.currentAnimation].frames[self.animations[self.currentAnimation].position]
+        local x, y, w, h = quad:getViewport()
+        self.gridFlipTranslation = w
+    else
+        self.gridFlipTranslation = 0
+    end
 
     --update position
 
@@ -57,7 +71,7 @@ end
 
 function Entity:draw()
     if #self.animations > 0 then
-        self.animations[self.currentAnimation]:draw(self.spriteSheet, math.floor(self.x+0.5), math.floor(self.y))
+        self.animations[self.currentAnimation]:draw(self.spriteSheet, math.floor(self.x+0.5)+self.spriteOffX+self.gridFlipTranslation, math.floor(self.y)+self.spriteOffY, 0, self.direction, 1)
     end
 
     if Debug then
