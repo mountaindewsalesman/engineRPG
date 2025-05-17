@@ -1,0 +1,2 @@
+scenes are comprised of a map tileset, the player, and a collection of entities. These entities may be interactable or otherwise. 
+Each scene is loaded when the player goes into it. Since the current scene is stored in one global variable, no extra memory is used and no garbage collection necesarry. 

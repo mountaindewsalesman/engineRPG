@@ -1,6 +1,6 @@
-Level = Class{}
+Scene = Class{}
 
-function Level:init(map, entities)
+function Scene:init(map, entities)
     self.map = map
     self.entities = entities or {}
     self.camera = {
@@ -10,7 +10,7 @@ function Level:init(map, entities)
     }
 end
 
-function Level:update(dt)
+function Scene:update(dt)
     -- update camera
     --self.camera.x = self.camera.x + (self.entities[1].x - self.camera.x) * self.camera.weight
     --self.camera.y = self.camera.y + (self.entities[1].y - self.camera.y) * self.camera.weight

@@ -95,7 +95,10 @@ function Entity:collidesMap()
     for i = 1, #xVals do
         local x = xVals[i]
         local y = yVals[i]
-        props = CurrentMap:getTileProperties(#CurrentMap.layers, tileX+x, tileY+y)
+        
+        props = CurrentScene.map:getTileProperties(#CurrentScene.map.layers, tileX+x, tileY+y)
+
+        
         if(props.collides and props.collides == "true") then
             if Rect.colliding(self.hitbox, {x = (tileX+x-1)*MapTileSize, y = (tileY+y-1)*MapTileSize, w = MapTileSize, h = MapTileSize}) then
                 collides = true

@@ -24,6 +24,7 @@ function PlayerClass:draw()
 end
 
 function PlayerClass:update(dt)
+    local frameRef = 60
     --get inputs
     local movVector = {x = 0, y = 0}
     if love.keyboard.isDown("right") then
@@ -46,8 +47,8 @@ function PlayerClass:update(dt)
     end
 
     --add accel to vel
-    self.entity.xVel = self.entity.xVel + (movVector.x * self.accel*dt)
-    self.entity.yVel = self.entity.yVel + (movVector.y * self.accel*dt)
+    self.entity.xVel = self.entity.xVel + (movVector.x * self.accel*dt*frameRef)
+    self.entity.yVel = self.entity.yVel + (movVector.y * self.accel*dt*frameRef)
 
     --cap speed
     if(math.sqrt(self.entity.xVel^2 + self.entity.yVel^2) > self.maxSpeed) then
@@ -57,8 +58,8 @@ function PlayerClass:update(dt)
     end
 
     --apply friction
-    self.entity.xVel = self.entity.xVel * math.pow(self.friction, dt)
-    self.entity.yVel = self.entity.yVel * math.pow(self.friction, dt)
+    self.entity.xVel = self.entity.xVel * math.pow(self.friction, dt*frameRef)
+    self.entity.yVel = self.entity.yVel * math.pow(self.friction, dt*frameRef)
 
     self.entity:update(dt)
 
