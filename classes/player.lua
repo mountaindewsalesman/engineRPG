@@ -1,7 +1,7 @@
 PlayerClass = Class{}
 
 function PlayerClass:init(entity, accel, maxSpeed, friction, inventory)
-    --Entity:init(x, y, w, h, xVel, yVel, true, animations, currentAnimation)
+    --entity:x, y, w, h, xVel, yVel, collides, spriteOffX, spriteOffY, direction)
     self.entity = entity
     self.entity.spriteSheet = love.graphics.newImage("assets/player/Player.png")
     self.entity.animationGrid =  Anim8.newGrid(32, 32, self.entity.spriteSheet:getWidth(), self.entity.spriteSheet:getHeight())
@@ -12,20 +12,13 @@ function PlayerClass:init(entity, accel, maxSpeed, friction, inventory)
     self.maxSpeed = maxSpeed or 5
     self.friction = friction or 0.9
     self.inventory = inventory or {}
+
+    self.interact = {x = self.entity.hitbox.x+15*self.entity.direction, y = self.entity.hitbox.y, w = 12, h = 12}
 end
 
-function PlayerClass:movement()
-
-end
-
-function PlayerClass:draw()
-    --called from map class when positon in sorting
-    self.entity:draw()
-end
-
-function PlayerClass:update(dt)
+function PlayerClass:movement(dt)
     local frameRef = 60
-    --get inputs
+
     local movVector = {x = 0, y = 0}
     if love.keyboard.isDown("right") then
         movVector.x = movVector.x + 1
@@ -61,13 +54,27 @@ function PlayerClass:update(dt)
     self.entity.xVel = self.entity.xVel * math.pow(self.friction, dt*frameRef)
     self.entity.yVel = self.entity.yVel * math.pow(self.friction, dt*frameRef)
 
-    self.entity:update(dt)
-
-    --update animations
     if(movVector.x ~= 0 or movVector.y ~= 0) then
         self.entity.currentAnimation = 2
     else
         self.entity.currentAnimation = 1
     end
+end
 
+function PlayerClass:draw()
+    --called from map class when positon in sorting
+    self.entity:draw()
+
+    if Debug then
+        love.graphics.setColor(0, 1, 0)
+        love.graphics.rectangle("line", self.interact.x, self.interact.y, self.interact.w, self.interact.h)
+        love.graphics.setColor(1, 1, 1)
+    end
+end
+
+function PlayerClass:update(dt)
+    self.interact = {x = self.entity.hitbox.x+15*self.entity.direction, y = self.entity.hitbox.y, w = 12, h = 12}
+    self:movement(dt)
+    self.entity:update(dt)
+    
 end

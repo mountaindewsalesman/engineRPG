@@ -77,6 +77,7 @@ function Entity:draw()
     if Debug then
         love.graphics.setColor(0, 0, 1)
         love.graphics.rectangle("line", self.x, self.y, self.w, self.h)
+        love.graphics.setColor(1, 1, 1)
     end
 end
 

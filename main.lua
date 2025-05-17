@@ -4,7 +4,6 @@ Sti = require('libraries/sti')
 Lovebird = require("libraries/lovebird")
 Class = require("libraries/Class")
 Anim8 = require("libraries/anim8")
-EntityStatic = require("classes/entityStatic")
 
 local setup = require("functions/setup")
 TileConvert = require("functions/TileConvert")
@@ -16,7 +15,9 @@ require("classes/scene")
 require("classes/entity")
 require("classes/entityStatic")
 
-Debug = false
+ReusableEntities = require("scenes/reusableEntities")
+
+Debug = true
 MapTileSize = 16
 
 function love.load()
@@ -40,18 +41,7 @@ end
 function love.draw()
     
     push:start()
-        if Debug then
-            CurrentScene.map:draw()
-        else 
-            for i, layer in ipairs(CurrentScene.map.layers) do
-            
-                if i ~= #CurrentScene.map.layers then
-                    layer:draw()
-                end
-            end
-        end
-    
-        Player:draw()
+    CurrentScene:draw()
     push:finish()
 
 end
