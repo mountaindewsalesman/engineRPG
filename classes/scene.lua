@@ -48,7 +48,6 @@ function Scene:draw()
 
     for i=1, #drawOrder do
         drawOrder[i].entity:draw()
-        Lovebird.print(drawOrder[i].entity.OffsetX)
 
         --sort player drawing
         local prev = drawOrder[i]

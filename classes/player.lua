@@ -20,18 +20,20 @@ function PlayerClass:movement(dt)
     local frameRef = 60
 
     local movVector = {x = 0, y = 0}
-    if love.keyboard.isDown("right") then
+
+    
+    if GetInputs.held("right") then
         movVector.x = movVector.x + 1
         self.entity.direction = 1
     end
-    if love.keyboard.isDown("left") then
+    if GetInputs.held("left") then
         movVector.x = movVector.x - 1
         self.entity.direction = -1
     end
-    if love.keyboard.isDown("up") then
+    if GetInputs.held("up") then
         movVector.y = movVector.y - 1
     end
-    if love.keyboard.isDown("down") then
+    if GetInputs.held("down") then
         movVector.y = movVector.y + 1
     end
     if (movVector.x ~= 0 and movVector.y ~= 0) then
@@ -73,8 +75,9 @@ function PlayerClass:draw()
 end
 
 function PlayerClass:update(dt)
-    self.interact = {x = self.entity.hitbox.x+15*self.entity.direction, y = self.entity.hitbox.y, w = 12, h = 12}
+    
     self:movement(dt)
+    self.interact = {x = self.entity.hitbox.x+15*self.entity.direction, y = self.entity.hitbox.y, w = 12, h = 12}
     self.entity:update(dt)
     
 end

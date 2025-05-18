@@ -5,9 +5,10 @@ Lovebird = require("libraries/lovebird")
 Class = require("libraries/Class")
 Anim8 = require("libraries/anim8")
 
-local setup = require("functions/setup")
+local setup = require("functions/Setup")
 TileConvert = require("functions/TileConvert")
 Rect = require("functions/Rect")
+require("functions/Inputs")
 
 require("classes/player")
 require("classes/scene")
@@ -35,6 +36,8 @@ end
  
 function love.update(dt)
     Lovebird.update()
+
+    GetInputs.update()
     Player:update(dt)
 end
 
