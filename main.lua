@@ -8,7 +8,9 @@ Anim8 = require("libraries/anim8")
 local setup = require("functions/Setup")
 TileConvert = require("functions/TileConvert")
 Rect = require("functions/Rect")
+UI = require("functions/UI")
 require("functions/Inputs")
+require("functions/textBox")
 
 require("classes/player")
 require("classes/scene")
@@ -18,7 +20,7 @@ require("classes/entityStatic")
 
 ReusableEntities = require("scenes/reusableEntities")
 
-Debug = true
+Debug = false
 MapTileSize = 16
 
 function love.load()
@@ -45,6 +47,9 @@ function love.draw()
     
     push:start()
     CurrentScene:draw()
+    
+    TextBox:draw()
+    
     push:finish()
 
 end

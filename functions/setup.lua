@@ -6,7 +6,7 @@ function setup.SetupWindow()
     local windowWidth, windowHeight = love.window.getDesktopDimensions()
     windowWidth = windowWidth/2
     windowHeight = windowHeight/2
-    push:setupScreen(gameWidth, gameHeight, windowWidth, windowHeight, {fullscreen = false, resizable = true, stretched = false, pixelperfect = false})
+    push:setupScreen(gameWidth, gameHeight, windowWidth, windowHeight, {fullscreen = false, resizable = true, stretched = false, pixelperfect = true})
 end
 
 function setup.setupPlayer()
