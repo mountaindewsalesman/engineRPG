@@ -16,11 +16,12 @@ require("classes/player")
 require("classes/scene")
 
 require("classes/entity")
-require("classes/entityStatic")
+require("classes/entities/entityStatic")
+require("classes/entities/entitySign")
 
 ReusableEntities = require("scenes/reusableEntities")
 
-Debug = false
+Debug = true
 MapTileSize = 16
 
 function love.load()
@@ -33,22 +34,30 @@ function love.load()
     setup.setupPlayer()    
     ---
     
-
+    --TextBox:beginText("On the edge of a forgotten coastline stood a lighthouse, tall and weathered by time, where the sea clawed endlessly at jagged rocks below. The villagers called it Blackmere Light, and it hadn't shone for nearly a decade - until one stormy evening, it came back to life.")
 end
  
 function love.update(dt)
     Lovebird.update()
 
-    GetInputs.update()
+    GetInputs:update()
+    CurrentScene:update(dt)
     Player:update(dt)
+    TextBox:update(dt)
 end
 
 function love.draw()
     
     push:start()
-    CurrentScene:draw()
-    
-    TextBox:draw()
+
+        love.graphics.push()
+        love.graphics.translate(math.floor(-CurrentScene.camera.x+0.5), math.floor(-CurrentScene.camera.y+0.5))
+
+            CurrentScene:draw()
+        love.graphics.pop()
+
+        
+        TextBox:draw()
     
     push:finish()
 

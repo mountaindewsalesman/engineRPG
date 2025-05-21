@@ -1,4 +1,5 @@
-local gameFont = love.graphics.newFont("assets/gamefont.ttf", 16)
+local gameFont = love.graphics.newFont("assets/gamefont2.ttf", 16)
+gameFont:setLineHeight(0.75)
 love.graphics.setFont(gameFont)
 
 

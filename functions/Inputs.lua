@@ -1,6 +1,9 @@
 GetInputs = {}
-GetInputs.Keybinds = {up = "up", down = "down", left = "left", right = "right", select = "c"}
-GetInputs.trackInputs = {up = 0, down = 0, left = 0, right = 0, select = 0}
+GetInputs.Keybinds = {up = "up", down = "down", left = "left", right = "right", select = "c", exit = "x"}
+GetInputs.trackInputs = {}
+for k, v in pairs(GetInputs.Keybinds) do
+    GetInputs.trackInputs[k] = 0
+end
 
 function GetInputs.update()
     --get each key and value in keybinds

@@ -2,7 +2,7 @@ PlayerClass = Class{}
 
 function PlayerClass:init(entity, accel, maxSpeed, friction, inventory)
     --entity:x, y, w, h, xVel, yVel, collides, spriteOffX, spriteOffY, direction)
-    self.entity = entity
+    self.entity = Entity(20, 20, 12, 12, 0, 0, true, 10, 18, 1)
     self.entity.spriteSheet = love.graphics.newImage("assets/player/Player.png")
     self.entity.animationGrid =  Anim8.newGrid(32, 32, self.entity.spriteSheet:getWidth(), self.entity.spriteSheet:getHeight())
     self.entity.animations[#self.entity.animations+1] = Anim8.newAnimation(self.entity.animationGrid('1-4', 1), 0.2)

@@ -6,16 +6,34 @@ function Scene:init(map, entities)
     self.camera = {
         x = 0,
         y = 0,
-        weight = 0.95
+        weight = 8
     }
 end
 
 function Scene:update(dt)
     -- update camera
-    --self.camera.x = self.camera.x + (self.entities[1].x - self.camera.x) * self.camera.weight
+    local playerCenterX = Player.entity.hitbox.x + Player.entity.hitbox.w/2
+    local playerCenterY = Player.entity.hitbox.y + Player.entity.hitbox.h/2
+
+    self.camera.x = self.camera.x + ((playerCenterX-GameWidth/2) - self.camera.x) * self.camera.weight * dt
+    self.camera.y = self.camera.y + ((playerCenterY-GameHeight/2) - self.camera.y) * self.camera.weight * dt
+
+    -- clamp camera to map bounds
+
+    if self.camera.x < 0 then
+        self.camera.x = 0
+    end
+    if self.camera.y < 0 then
+        self.camera.y = 0
+    end
+    if self.camera.x > self.map.width*MapTileSize - GameWidth then
+        self.camera.x = self.map.width*MapTileSize - GameWidth
+    end
+    if self.camera.y > self.map.height*MapTileSize - GameHeight then
+        self.camera.y = self.map.height*MapTileSize - GameHeight
+    end
     --self.camera.y = self.camera.y + (self.entities[1].y - self.camera.y) * self.camera.weight
 
-    -- update entities
     for i=1, #self.entities do
         self.entities[i]:update(dt)
     end
@@ -23,12 +41,12 @@ end
 
 function Scene:draw()
     if Debug then
-        CurrentScene.map:draw()
+        CurrentScene.map:draw(math.floor(-CurrentScene.camera.x+0.5), math.floor(-CurrentScene.camera.y+0.5))
     else 
         for i, layer in ipairs(CurrentScene.map.layers) do
         
             if i ~= #CurrentScene.map.layers then
-                layer:draw()
+                layer:draw(math.floor(-CurrentScene.camera.x+0.5), math.floor(-CurrentScene.camera.y+0.5))
             end
         end
     end
