@@ -6,7 +6,8 @@ function Scene:init(map, entities)
     self.camera = {
         x = 0,
         y = 0,
-        weight = 8
+        weight = 8,
+        edgeBorder = 16
     }
 end
 
@@ -15,8 +16,41 @@ function Scene:update(dt)
     local playerCenterX = Player.entity.hitbox.x + Player.entity.hitbox.w/2
     local playerCenterY = Player.entity.hitbox.y + Player.entity.hitbox.h/2
 
-    self.camera.x = self.camera.x + ((playerCenterX-GameWidth/2) - self.camera.x) * self.camera.weight * dt
-    self.camera.y = self.camera.y + ((playerCenterY-GameHeight/2) - self.camera.y) * self.camera.weight * dt
+    local dCamX = ((playerCenterX-GameWidth/2) - self.camera.x) * self.camera.weight * dt
+    local dCamY = ((playerCenterY-GameHeight/2) - self.camera.y) * self.camera.weight * dt
+
+    --smooth movement when getting to an edge
+    local bW = 0.8
+    local bA = 1-bW
+
+    if self.camera.y < self.camera.edgeBorder then
+        local mult = ((self.camera.y/self.camera.edgeBorder)*bW+bA)
+        if dCamY < 0 then
+            dCamY = dCamY * mult
+        end
+    end
+    if self.camera.y + GameHeight > self.map.height*MapTileSize - self.camera.edgeBorder then
+        local mult = ((((self.map.height*MapTileSize)-(self.camera.y + GameHeight))/self.camera.edgeBorder)*bW+bA)
+        if dCamY > 0 then
+            dCamY = dCamY * mult
+        end
+    end
+    if self.camera.x < self.camera.edgeBorder then
+        local mult = ((self.camera.x/self.camera.edgeBorder)*bW+bA)
+        if dCamX < 0 then
+            dCamX = dCamX * mult
+        end
+    end
+    if self.camera.x + GameWidth > self.map.width*MapTileSize - self.camera.edgeBorder then
+        local mult = ((((self.map.width*MapTileSize)-(self.camera.x + GameWidth))/self.camera.edgeBorder)*bW+bA)
+        if dCamX > 0 then
+            dCamX = dCamX * mult
+        end
+    end
+
+
+    self.camera.x = self.camera.x + dCamX
+    self.camera.y = self.camera.y + dCamY
 
     -- clamp camera to map bounds
 

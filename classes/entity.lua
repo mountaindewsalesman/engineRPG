@@ -1,4 +1,5 @@
 Entity = Class{}
+local tileConvert = require("functions/TileConvert")
 
 function Entity:init(x, y, w, h, xVel, yVel, collides, hitOffX, hitOffY, direction)
     self.x = x or 0
@@ -86,8 +87,8 @@ end
 
 function Entity:collidesMap()
 
-    local tileX = TileConvert.pixToTile(self.hitbox.x+(self.hitbox.w/2), self.hitbox.y+(self.hitbox.h/2))[1] + 1
-    local tileY = TileConvert.pixToTile(self.hitbox.x+(self.hitbox.w/2), self.hitbox.y+(self.hitbox.h/2))[2] + 1
+    local tileX = tileConvert.pixToTile(self.hitbox.x+(self.hitbox.w/2), self.hitbox.y+(self.hitbox.h/2))[1] + 1
+    local tileY = tileConvert.pixToTile(self.hitbox.x+(self.hitbox.w/2), self.hitbox.y+(self.hitbox.h/2))[2] + 1
 
     local props
     

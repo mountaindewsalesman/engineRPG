@@ -21,7 +21,7 @@ require("classes/entities/entitySign")
 
 ReusableEntities = require("scenes/reusableEntities")
 
-Debug = true
+Debug = false
 MapTileSize = 16
 
 function love.load()
