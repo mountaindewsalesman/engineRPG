@@ -6,7 +6,6 @@ Class = require("libraries/Class")
 Anim8 = require("libraries/anim8")
 
 local setup = require("functions/Setup")
-TileConvert = require("functions/TileConvert")
 Rect = require("functions/Rect")
 UI = require("functions/UI")
 require("functions/Inputs")

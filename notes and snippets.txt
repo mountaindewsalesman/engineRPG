@@ -4,6 +4,10 @@ tempPlayer.spriteSheet = love.graphics.newImage("assets/player/playerSprite.png"
 tempPlayer.animationGrid = Anim8.newGrid(32, 32, tempPlayer.spriteSheet:getWidth(), tempPlayer.spriteSheet:getHeight())
 tempPlayer.animations[1] = Anim8.newAnimation(tempPlayer.animationGrid('1-2',1), 0.5)
 
+add hitbox color param to entity class
 add doors that can switch current scene
-add pause functionality
+ - take width, height, x, y, need interact (to switch), file of new scene, output x and y. 
+add pause functionality by changing dt. updating UI and screenwide animations is indipendent of this dt change. 
 add animation transition for switching scene using pause functionality
+
+add combat entities: combat system, health, etc

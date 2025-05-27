@@ -52,7 +52,7 @@ function Entity:update(dt)
         if self:collidesMap() and self.collides then
             -- step back pixel by pixel until no longer colliding
             while self:collidesMap() do
-                self.x = self.x + (self.xVel > 0 and -0.1 or 0.1)
+                self.x = self.x + (self.xVel > 0 and -0.5 or 0.5)
                 self.hitbox.x = self.x+self.hitOffX
             end
             self.xVel = 0
@@ -63,7 +63,7 @@ function Entity:update(dt)
         self.hitbox.y = self.y+self.hitOffY
         if self:collidesMap() and self.collides then
             while self:collidesMap() do
-                self.y = self.y + (self.yVel > 0 and -0.1 or 0.1)
+                self.y = self.y + (self.yVel > 0 and -0.5 or 0.5)
                 self.hitbox.y = self.y+self.hitOffY
             end
             self.yVel = 0
@@ -81,6 +81,8 @@ function Entity:draw()
     if Debug then
         love.graphics.setColor(0, 0, 1)
         love.graphics.rectangle("line", self.hitbox.x, self.hitbox.y, self.hitbox.w, self.hitbox.h)
+        love.graphics.setColor(1, 0, 0)
+        love.graphics.rectangle("line", self.x-1, self.y-1, 2, 2)
         love.graphics.setColor(1, 1, 1)
     end
 end
@@ -101,7 +103,7 @@ function Entity:collidesMap()
         local x = xVals[i]
         local y = yVals[i]
         
-        if tileX+x > 0 and tileY+y > 0 and tileX+x < CurrentScene.map.width and tileY+y < CurrentScene.map.height then
+        if tileX+x > 0 and tileY+y > 0 and tileX+x <= CurrentScene.map.width and tileY+y <= CurrentScene.map.height then
             props = CurrentScene.map:getTileProperties(#CurrentScene.map.layers, tileX+x, tileY+y)
 
             if(props.collides and props.collides == "true") then
