@@ -32,3 +32,6 @@ end
 function GetInputs.tap(key)
     return GetInputs.trackInputs[key] == 1
 end
+
+_G.GetInputs = GetInputs
+return GetInputs

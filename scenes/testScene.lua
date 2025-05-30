@@ -1,12 +1,16 @@
-local testScene = Scene(Sti("assets/maps/testMapFixed.lua"), {})
+local scene = Scene(Sti("assets/maps/testMapFixed.lua"), {})
 
 
-testScene.entities[#testScene.entities + 1] = ReusableEntities.shack(20, 1)
-testScene.entities[#testScene.entities + 1] = ReusableEntities.beachSign(19, 5, "This is house number 1, where the windows blink like tired eyes, a clock ticks louder than the silence, and though no one lives here anymore - someone always watches.")
+table.insert(scene.entities, ReusableEntities.shack(20, 1))
+table.insert(scene.entities, ReusableEntities.beachSign(19, 5, {"I am a sign number 1", "but my friends usually just call me dipshit"}))
 
 
-testScene.entities[#testScene.entities + 1] = ReusableEntities.shack(11, 18)
-testScene.entities[#testScene.entities + 1] = ReusableEntities.beachSign(17, 22, "i am a sign")
+table.insert(scene.entities, ReusableEntities.shack(11, 18))
+table.insert(scene.entities, ReusableEntities.beachSign(17, 22, "i am a sign number"))
+
+table.insert(scene.entities, ReusableEntities.label(3, 23, 32, 32, "rocks."))
+
+table.insert(scene.entities, ReusableEntities.door(24, 6, 16, 16, "room", 24, 28))
 
 
-return testScene
+return scene

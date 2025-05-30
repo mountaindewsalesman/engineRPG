@@ -1,5 +1,4 @@
 Entity = Class{}
-local tileConvert = require("functions/TileConvert")
 
 function Entity:init(x, y, w, h, xVel, yVel, collides, hitOffX, hitOffY, direction)
     self.x = x or 0
@@ -29,7 +28,9 @@ function Entity:update(dt)
     self.hitbox = {x = self.x+self.hitOffX, y = self.y+self.hitOffY, w = self.w, h = self.h}
 
     --update animations
-    self.animations[self.currentAnimation]:update(dt)
+    if(#self.animations > 0) then
+        self.animations[self.currentAnimation]:update(dt)
+    end
 
     --update sprite drawing
     if self.direction == -1 then
@@ -89,8 +90,8 @@ end
 
 function Entity:collidesMap()
 
-    local tileX = tileConvert.pixToTile(self.hitbox.x+(self.hitbox.w/2), self.hitbox.y+(self.hitbox.h/2))[1] + 1
-    local tileY = tileConvert.pixToTile(self.hitbox.x+(self.hitbox.w/2), self.hitbox.y+(self.hitbox.h/2))[2] + 1
+    local tileX = TileConvert.pixToTile(self.hitbox.x+(self.hitbox.w/2), self.hitbox.y+(self.hitbox.h/2))[1] + 1
+    local tileY = TileConvert.pixToTile(self.hitbox.x+(self.hitbox.w/2), self.hitbox.y+(self.hitbox.h/2))[2] + 1
 
     local props
     

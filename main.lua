@@ -5,11 +5,12 @@ Lovebird = require("libraries/lovebird")
 Class = require("libraries/Class")
 Anim8 = require("libraries/anim8")
 
-local setup = require("functions/Setup")
-Rect = require("functions/Rect")
+require("functions/Setup")
+require("functions/Rect")
 UI = require("functions/UI")
 require("functions/Inputs")
 require("functions/textBox")
+require("functions/TileConvert")
 
 require("classes/player")
 require("classes/scene")
@@ -17,6 +18,7 @@ require("classes/scene")
 require("classes/entity")
 require("classes/entities/entityStatic")
 require("classes/entities/entitySign")
+require("classes/entities/entityPortal")
 
 ReusableEntities = require("scenes/reusableEntities")
 
@@ -27,10 +29,10 @@ function love.load()
     CurrentScene = require("scenes/testScene")
     --load any assets
     love.graphics.setDefaultFilter("nearest", "nearest")
-    setup.SetupWindow()
+    Setup.setupWindow()
 
     
-    setup.setupPlayer()    
+    Setup.setupPlayer()    
     ---
     
     --TextBox:beginText("On the edge of a forgotten coastline stood a lighthouse, tall and weathered by time, where the sea clawed endlessly at jagged rocks below. The villagers called it Blackmere Light, and it hadn't shone for nearly a decade - until one stormy evening, it came back to life.")
@@ -40,9 +42,10 @@ function love.update(dt)
     Lovebird.update()
 
     GetInputs:update()
+    TextBox:update(dt)
     CurrentScene:update(dt)
     Player:update(dt)
-    TextBox:update(dt)
+    
 end
 
 function love.draw()

@@ -19,4 +19,15 @@ end
 --other types of signs too
 
 
+function entities.label(x, y, w, h, text)
+    local loadingEntity = Entity(x*MapTileSize, y*MapTileSize, w, h, 0, 0, false, 0, 0)
+    return EntitySign(loadingEntity, text)
+end
+
+function entities.door(x, y, w, h, output, outX, outY)
+    local loadingEntity = Entity(x*MapTileSize, y*MapTileSize, w, h, 0, 0, false, 0, 0)
+    return EntityPortal(loadingEntity, true, output, outX*MapTileSize, outY*MapTileSize)
+end
+
+
 return entities

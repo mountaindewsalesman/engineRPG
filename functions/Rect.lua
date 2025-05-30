@@ -1,5 +1,5 @@
-local rect = {}
-function rect.colliding(rect1, rect2)
+Rect = {}
+function Rect.colliding(rect1, rect2)
     if not rect1 or not rect2 then
         print("Nil rectangle in collision check")
         return false
@@ -20,4 +20,6 @@ function rect.colliding(rect1, rect2)
 
     
 end
-return rect
+
+_G.Rect = Rect
+return Rect
