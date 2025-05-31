@@ -28,7 +28,7 @@ function Entity:update(dt)
     self.hitbox = {x = self.x+self.hitOffX, y = self.y+self.hitOffY, w = self.w, h = self.h}
 
     --update animations
-    if(#self.animations > 0) then
+    if(#self.animations > 0) and not GamePaused then
         self.animations[self.currentAnimation]:update(dt)
     end
 

@@ -1,4 +1,4 @@
-GetInputs = {}
+local GetInputs = {}
 GetInputs.Keybinds = {up = "up", down = "down", left = "left", right = "right", select = "c", exit = "x"}
 GetInputs.trackInputs = {}
 for k, v in pairs(GetInputs.Keybinds) do
@@ -33,5 +33,4 @@ function GetInputs.tap(key)
     return GetInputs.trackInputs[key] == 1
 end
 
-_G.GetInputs = GetInputs
 return GetInputs

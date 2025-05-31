@@ -1,5 +1,5 @@
 --text is initialized using beginText command. draw and update are called on every frame, but only sometiems do somthing
-TextBox = {}
+local TextBox = {}
 
 TextBox.drawingText = false
 TextBox.progress = 0
@@ -48,3 +48,4 @@ function TextBox:beginText(text, name, speed, sound)
     TextBox.text = text
     TextBox.subString = ""
 end
+return TextBox

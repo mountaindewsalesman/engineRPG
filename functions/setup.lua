@@ -1,6 +1,7 @@
-Setup = {}
+local Setup = {}
 local push = require("libraries/push")
 
+---@diagnostic disable-next-line: duplicate-set-field
 function Setup.setupWindow()
     GameWidth, GameHeight = 480, 270 
     local windowWidth, windowHeight = love.window.getDesktopDimensions()
@@ -9,6 +10,7 @@ function Setup.setupWindow()
     push:setupScreen(GameWidth, GameHeight, windowWidth, windowHeight, {fullscreen = false, resizable = true, stretched = false, pixelperfect = true})
 end
 
+---@diagnostic disable-next-line: duplicate-set-field
 function Setup.setupPlayer() 
     local playerEntity = Entity(50, 50, 12, 12, 0, 0, true, -9, -20, 1)
     Player = PlayerClass(playerEntity, 100, 130, 0.70, {})
@@ -16,5 +18,4 @@ function Setup.setupPlayer()
 end
 -- setup screen
 
-_G.Setup = Setup
 return Setup

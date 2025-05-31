@@ -5,12 +5,13 @@ Lovebird = require("libraries/lovebird")
 Class = require("libraries/Class")
 Anim8 = require("libraries/anim8")
 
-require("functions/Setup")
-require("functions/Rect")
+Setup = require("functions/Setup")
+Rect = require("functions/Rect")
 UI = require("functions/UI")
-require("functions/Inputs")
-require("functions/textBox")
-require("functions/TileConvert")
+GetInputs = require("functions/Inputs")
+TextBox = require("functions/TextBox")
+TileConvert = require("functions/TileConvert")
+ScreenEffect = require("functions/ScreenEffect")
 
 require("classes/player")
 require("classes/scene")
@@ -20,31 +21,35 @@ require("classes/entities/entityStatic")
 require("classes/entities/entitySign")
 require("classes/entities/entityPortal")
 
-ReusableEntities = require("scenes/reusableEntities")
+ReusableEntities = require("assets/scenes/reusableEntities")
 
 Debug = false
+GamePaused = false
 MapTileSize = 16
 
 function love.load()
-    CurrentScene = require("scenes/testScene")
+    CurrentScene = require("assets/scenes/testScene")
     --load any assets
     love.graphics.setDefaultFilter("nearest", "nearest")
     Setup.setupWindow()
 
     
-    Setup.setupPlayer()    
-    ---
-    
-    --TextBox:beginText("On the edge of a forgotten coastline stood a lighthouse, tall and weathered by time, where the sea clawed endlessly at jagged rocks below. The villagers called it Blackmere Light, and it hadn't shone for nearly a decade - until one stormy evening, it came back to life.")
+    Setup.setupPlayer()        
 end
  
 function love.update(dt)
     Lovebird.update()
-
     GetInputs:update()
+
     TextBox:update(dt)
-    CurrentScene:update(dt)
-    Player:update(dt)
+    local gameDT = dt*ScreenEffect.dtMult
+    GamePaused = (gameDT == 0)
+
+    CurrentScene:update(gameDT)
+    Player:update(gameDT)
+
+
+    ScreenEffect:update(dt)
     
 end
 
@@ -56,9 +61,10 @@ function love.draw()
         love.graphics.translate(math.floor(-CurrentScene.camera.x+0.5), math.floor(-CurrentScene.camera.y+0.5))
 
             CurrentScene:draw()
+
         love.graphics.pop()
 
-        
+        ScreenEffect:draw()
         TextBox:draw()
     
     push:finish()

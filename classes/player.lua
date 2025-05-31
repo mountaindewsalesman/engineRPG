@@ -78,6 +78,7 @@ function PlayerClass:movement(dt)
     self.entity.yVel = self.entity.yVel * math.pow(self.friction, dt*frameRef)
 
     --animations
+
     if self.direction.x == 1 or self.direction.x == 0 then
         self.entity.direction = 1
     else
@@ -101,6 +102,7 @@ function PlayerClass:movement(dt)
             self.entity.currentAnimation = 3
         end
     end
+
 end
 
 function PlayerClass:draw()
@@ -115,8 +117,9 @@ function PlayerClass:draw()
 end
 
 function PlayerClass:update(dt)
-    
-    self:movement(dt)
+    if not GamePaused then
+        self:movement(dt)
+    end
     self.interact = {x = self.entity.hitbox.x+15*self.direction.x, y = self.entity.hitbox.y-15*self.direction.y, w = 12, h = 12}
     self.entity:update(dt)
     
