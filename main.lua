@@ -23,7 +23,7 @@ require("classes/entities/entityPortal")
 
 ReusableEntities = require("assets/scenes/reusableEntities")
 
-Debug = false
+Debug = true
 GamePaused = false
 MapTileSize = 16
 
