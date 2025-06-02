@@ -29,7 +29,7 @@ function EntityPortal:update(dt)
         if #ScreenEffect.currentEffects > 0 then
             local foundEffect = false
             for k, effect in pairs(ScreenEffect.currentEffects) do
-                
+                --check if the effect is still in the list
                 if effect.type == "transition" and effect.duration == self.transitionDur then
                     foundEffect = true
                 end
