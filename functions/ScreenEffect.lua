@@ -26,7 +26,7 @@ function ScreenEffect:update(dt)
         end
 
         --clamp to 1 to ensure that 0 second animations work
-        if effect.timeActive >= math.max(effect.duration, 1) then
+        if effect.timeActive >= effect.duration then
             --remove effect
             table.remove(ScreenEffect.currentEffects, i)
             i = i - 1

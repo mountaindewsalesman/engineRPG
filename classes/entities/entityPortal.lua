@@ -9,7 +9,7 @@ function EntityPortal:init(entity, needsInteract, outScene, outX, outY, preserve
     self.outY = outY or 32
     self.preserveOffX = preserveXOff or false
     self.preserveOffY = preserveYOff or false
-    self.transitionDur = 0.7
+    self.transitionDur = 2
 end
 
 function EntityPortal:draw()
@@ -27,12 +27,23 @@ function EntityPortal:update(dt)
 
     if self.waitingForTransition then
         if #ScreenEffect.currentEffects > 0 then
+            local foundEffect = false
             for k, effect in pairs(ScreenEffect.currentEffects) do
-                if effect.type == "transition" and effect.timeActive > effect.duration/2 then
+                
+                if effect.type == "transition" and effect.duration == self.transitionDur then
+                    foundEffect = true
+                end
+                
+                if effect.type == "transition" and effect.duration == self.transitionDur and effect.timeActive > effect.duration/2 then
                     self:switchScene()
                     self.waitingForTransition = false
-
                 end
+            end
+            if not foundEffect then
+                --no transition has been found, so it has been removed and we should switch scene anywayss. 
+                self:switchScene()
+                self.waitingForTransition = false
+                foundEffect = true
             end
         end
     end
