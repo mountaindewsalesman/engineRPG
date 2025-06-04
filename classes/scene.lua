@@ -68,8 +68,8 @@ function Scene:update(dt)
     end
     --self.camera.y = self.camera.y + (self.entities[1].y - self.camera.y) * self.camera.weight
 
-    for i=1, #self.entities do
-        self.entities[i]:update(dt)
+    for k, v in pairs(self.entities) do
+        self.entities[k]:update(dt)
     end
 end
 
@@ -92,7 +92,17 @@ function Scene:draw()
         table.sort(drawOrder, function(a, b)
             return a.entity.hitbox.y+a.entity.hitbox.h < b.entity.hitbox.y+b.entity.hitbox.h
         end)
-    
+
+        --make all entities indexed
+        local addIndicies = {}
+        local k = 1
+        for _, v in pairs(drawOrder) do
+            addIndicies[k] = v
+            Lovebird.print(k, v)
+            k = k + 1
+        end
+        drawOrder = addIndicies
+
         --if player is higher than all entities
         local aPlayerY = Player.entity.hitbox.y + Player.entity.hitbox.h
         if aPlayerY < drawOrder[1].entity.hitbox.y + drawOrder[1].entity.hitbox.h then
