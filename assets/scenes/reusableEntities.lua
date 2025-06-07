@@ -14,7 +14,7 @@ function entities.beachSign(x, y, text)
     loadingEntity.spriteSheet = love.graphics.newImage("assets/entities/sign.png")
     loadingEntity.animationGrid = Anim8.newGrid(16, 16, loadingEntity.spriteSheet:getWidth(), loadingEntity.spriteSheet:getHeight())
     loadingEntity.animations[#loadingEntity.animations+1] = Anim8.newAnimation(loadingEntity.animationGrid('1-1', 1), math.huge)
-    return EntitySign(loadingEntity, text)
+    return EntitySign(loadingEntity, text, 100)
 end
 --other types of signs too
 

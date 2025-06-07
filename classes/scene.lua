@@ -98,7 +98,6 @@ function Scene:draw()
         local k = 1
         for _, v in pairs(drawOrder) do
             addIndicies[k] = v
-            Lovebird.print(k, v)
             k = k + 1
         end
         drawOrder = addIndicies

@@ -34,7 +34,7 @@ function TextBox:update(dt)
             if TextBox.subString == TextBox.text then
                 TextBox.drawingText = false
             else
-                TextBox.progress = math.huge
+                TextBox.progress = #TextBox.text / TextBox.speed
                 TextBox.subString = TextBox.text
             end
         end
@@ -42,10 +42,17 @@ function TextBox:update(dt)
     end
 end
 
-function TextBox:beginText(text, name, speed, sound)
-    TextBox.drawingText = true
-    TextBox.progress = 0
-    TextBox.text = text
-    TextBox.subString = ""
+
+function TextBox:beginText(text, speed, name, sound)
+    if(not TextBox.drawingText) then
+        TextBox.drawingText = true
+        TextBox.progress = 0
+        TextBox.text = text
+        TextBox.subString = ""
+        TextBox.speed = speed or 25
+    end
 end
+
+
 return TextBox
+
