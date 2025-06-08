@@ -1,5 +1,5 @@
 local GetInputs = {}
-GetInputs.Keybinds = {up = "up", down = "down", left = "left", right = "right", select = "c", exit = "x"}
+GetInputs.Keybinds = {up = "up", down = "down", left = "left", right = "right", select = "z", exit = "x", attack = "a", dash = "s"}
 GetInputs.trackInputs = {}
 for k, v in pairs(GetInputs.Keybinds) do
     GetInputs.trackInputs[k] = 0

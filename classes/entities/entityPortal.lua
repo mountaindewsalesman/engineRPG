@@ -3,6 +3,7 @@ EntityPortal = Class{}
 -- if preserveXOff or PreserveYOff is not false, the entity will be moved to their x or y position + preserveXOff or preserveYOff
 function EntityPortal:init(entity, needsInteract, outScene, outX, outY, preserveXOff, preserveYOff)
     self.entity = entity
+    
     self.needsInteract = needsInteract or false
     self.outScene = outScene or "testScene"
     self.outX = outX or 32

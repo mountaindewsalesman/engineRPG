@@ -2,6 +2,7 @@ EntitySign = Class{}
 
 function EntitySign:init(entity, text, speed)
     self.entity = entity
+    
     self.text = text or "nil"
     self.currentBox = 0
     self.speed = speed or 25

@@ -1,6 +1,8 @@
 PlayerClass = Class{}
 
-function PlayerClass:init(entity, accel, maxSpeed, friction, inventory, direction)
+--z = select, x = exit, a = attack, s = dash
+
+function PlayerClass:init(entity, accel, maxSpeed, friction, inventory)
     --entity:x, y, w, h, xVel, yVel, collides, spriteOffX, spriteOffY, direction)
     self.entity = Entity(20, 20, 12, 12, 0, 0, true, 10, 18, 1)
     self.entity.spriteSheet = love.graphics.newImage("assets/player/Player.png")
@@ -24,6 +26,8 @@ function PlayerClass:init(entity, accel, maxSpeed, friction, inventory, directio
     self.interact = {x = self.entity.hitbox.x+15*self.entity.direction, y = self.entity.hitbox.y, w = 12, h = 12}
 
     self.direction = {x = 1, y = 0}
+
+    self.attack = {inAttack = false, hitbox = self.interact, duration = 0} --duration goes down by dt and then attack stops when it reaches 0
 end
 
 function PlayerClass:movement(dt)
@@ -58,8 +62,8 @@ function PlayerClass:movement(dt)
 
     --normalize speed
     if (movVector.x ~= 0 and movVector.y ~= 0) then
-        movVector.x = movVector.x * 0.707
-        movVector.y = movVector.y * 0.707
+        movVector.x = movVector.x * 0.7071
+        movVector.y = movVector.y * 0.7071
     end
 
     --add accel to vel

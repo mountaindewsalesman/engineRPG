@@ -7,7 +7,7 @@ function Setup.setupWindow()
     local windowWidth, windowHeight = love.window.getDesktopDimensions()
     windowWidth = windowWidth*0.75
     windowHeight = windowHeight*0.75
-    push:setupScreen(GameWidth, GameHeight, windowWidth, windowHeight, {fullscreen = false, resizable = true, stretched = false, pixelperfect = true})
+    push:setupScreen(GameWidth, GameHeight, windowWidth, windowHeight, {fullscreen = false, resizable = true, stretched = false, pixelperfect = true, vsync = true})
 end
 
 ---@diagnostic disable-next-line: duplicate-set-field

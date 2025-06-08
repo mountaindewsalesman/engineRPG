@@ -21,6 +21,7 @@ function Entity:init(x, y, w, h, xVel, yVel, collides, hitOffX, hitOffY, directi
     self.hitbox = {x = self.x+self.hitOffX, y = self.y+self.hitOffY, w = self.w, h = self.h}
 
     self.gridFlipTranslation = 0
+
 end
 
 function Entity:update(dt)

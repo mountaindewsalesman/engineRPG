@@ -49,6 +49,7 @@ function TextBox:beginText(text, speed, name, sound)
         TextBox.progress = 0
         TextBox.text = text
         TextBox.subString = ""
+        
         TextBox.speed = speed or 25
     end
 end
