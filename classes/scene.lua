@@ -18,7 +18,6 @@ function Scene:update(dt)
 
     local dCamX = ((playerCenterX-GameWidth/2) - self.camera.x) * self.camera.weight * dt
     local dCamY = ((playerCenterY-GameHeight/2) - self.camera.y) * self.camera.weight * dt
-
     --smooth movement when getting to an edge
     local bW = 0.8
     local bA = 1-bW
